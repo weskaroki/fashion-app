@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Sleek Fashion</string>
+    <string name="title_activity_mens">MensActivity</string>
+    <string name="title_activity_ladies">LadiesActivity</string>
+    <string name="title_activity_kids">KidsActivity</string>
+</resources>
