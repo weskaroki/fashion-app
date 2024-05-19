@@ -15,6 +15,7 @@ import com.wes.sleekfashion.Item
 import com.wes.sleekfashion.R
 import com.wes.sleekfashion.navigation.ROUTE_JERSEY
 import com.wes.sleekfashion.navigation.ROUTE_KIDS
+import com.wes.sleekfashion.navigation.ROUTE_KIDSSHIRT
 import com.wes.sleekfashion.navigation.ROUTE_LADIES
 import com.wes.sleekfashion.navigation.ROUTE_LOGIN
 import com.wes.sleekfashion.navigation.ROUTE_MAIN_PRODUCTS_SCREEN
@@ -32,7 +33,7 @@ class KidsActivity : ComponentActivity() {
 
             title = "shirts",
             image = R.drawable.kidsshirt,
-            Route = ROUTE_SHIRTS,
+            Route = ROUTE_KIDSSHIRT,
             price = 700
         ),
         Item(

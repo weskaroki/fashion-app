@@ -33,33 +33,39 @@ import com.wes.sleekfashion.navigation.ROUTE_REGISTER
 
 @Composable
  fun HomeScreen(navController: NavController){
+    Box (modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.fashion
+            ),
+            contentDescription = "home",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.matchParentSize()
+
+            )}
      Column (
-         modifier = Modifier
-             .fillMaxSize()
-             .background(Color.DarkGray),
+         modifier = Modifier.fillMaxSize()
+
+
 
      ){
-         Box (modifier = Modifier.fillMaxHeight(0.78f)) {
-             Image(
-                 painter = painterResource(id = R.drawable.pic),
-                 contentDescription = "home",
-                 contentScale = ContentScale.FillBounds,
-
-             )}
-         Text(text = "Discover your Style With" ,
-                 color = Color.White,
-                 fontSize = 30.sp,
-                 textAlign = TextAlign.Center)
-             Text(text = "Sleek Fashion",
+         Spacer(modifier = Modifier.height(400.dp))
+         Box () {
+             Text(text = "Sleek" ,
                  color = Color.Yellow,
-                 fontSize = 30.sp)
+                 fontSize = 80.sp,
 
-             Spacer(modifier = Modifier.height(5.dp))
-             Button(onClick = {navController.navigate(ROUTE_LOGIN) }, modifier = Modifier.fillMaxWidth()
-             ){
-                 Text(text = "Get Started")
+                 textAlign = TextAlign.Center)
 
-             }
+         }
+
+         Spacer(modifier = Modifier.height(220.dp))
+            Box (contentAlignment = Alignment.BottomEnd) {
+                Button(onClick = {navController.navigate(ROUTE_LOGIN) }, modifier = Modifier.fillMaxWidth()
+                ){
+                    Text(text = "Get Started")
+
+                }
+            }
 
 
 

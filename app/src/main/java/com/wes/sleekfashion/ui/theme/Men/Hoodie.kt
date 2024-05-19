@@ -50,10 +50,12 @@ import androidx.navigation.compose.rememberNavController
 import com.wes.sleekfashion.R
 import com.wes.sleekfashion.data.ProductViewModel
 import com.wes.sleekfashion.navigation.ROUTE_ADD_TO_CART
+import com.wes.sleekfashion.navigation.ROUTE_MAIN_PRODUCTS_SCREEN
 import com.wes.sleekfashion.navigation.ROUTE_REGISTER
+import com.wes.sleekfashion.ui.theme.Products.AddProductsScreen
 
 @Composable
-fun  HoodieScreen(navController: NavController){
+fun  HoodieScreen(navController: NavHostController){
 
     Column (
 
@@ -65,7 +67,7 @@ fun  HoodieScreen(navController: NavController){
 
 
     ){
-        Navbar2()
+        Navbar2(navController)
         Spacer(modifier = Modifier.height(10.dp))
         Box (
             modifier = Modifier
@@ -80,7 +82,7 @@ fun  HoodieScreen(navController: NavController){
             )
         }
             Spacer(modifier = Modifier.height(30.dp))
-        AddProductsScreen(rememberNavController())
+        AddProductsScreen(navController)
 
 
         }
@@ -90,12 +92,12 @@ fun  HoodieScreen(navController: NavController){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Navbar2(){
+fun Navbar2(navController: NavController){
     val context = LocalContext.current.applicationContext
     TopAppBar(
-        title = { Text(text = "Discover", color = Color.DarkGray) },
+        title = { Text(text = "Shop", color = Color.DarkGray) },
         navigationIcon = {
-            IconButton(onClick = { Toast.makeText(context,"You have a clicked a home icon", Toast.LENGTH_SHORT).show() }) {
+            IconButton(onClick = { navController.navigate(ROUTE_MAIN_PRODUCTS_SCREEN) }) {
                 Icon(imageVector = Icons.Filled.Home, contentDescription = "HOME", tint = Color.DarkGray)
             }
         },
@@ -105,79 +107,11 @@ fun Navbar2(){
             navigationIconContentColor = Color.White
         ),
         actions = {
-            IconButton(onClick = { Toast.makeText(context,"shopping cart", Toast.LENGTH_SHORT).show()}) {
+            IconButton(onClick = { navController.navigate(ROUTE_ADD_TO_CART)}) {
                 Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = "shop", tint = Color.DarkGray )
             }
 
         })
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AddProductsScreen(navController: NavHostController) {
-    Column(modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        var context = LocalContext.current
-//        Text(
-//            text = "Add product",
-//            fontSize = 30.sp,
-//            fontFamily = FontFamily.Cursive,
-//            color = Color.Red,
-//            modifier = Modifier.padding(20.dp),
-//            fontWeight = FontWeight.Bold,
-//            textDecoration = TextDecoration.Underline
-//        )
-
-        var productName by remember { mutableStateOf(TextFieldValue("")) }
-        var productQuantity by remember { mutableStateOf(TextFieldValue("")) }
-        var productPrice by remember { mutableStateOf(TextFieldValue("")) }
-
-        OutlinedTextField(
-            value = productName,
-            onValueChange = { productName = it },
-            label = { Text(text = "Product name *") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        OutlinedTextField(
-            value = productQuantity,
-            onValueChange = { productQuantity = it },
-            label = { Text(text = "Product quantity *") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        OutlinedTextField(
-            value = productPrice,
-            onValueChange = { productPrice = it },
-            label = { Text(text = "Product price *") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Button(onClick = {
-
-            val productRepository = ProductViewModel(navController,context)
-            productRepository.saveProduct(productName.text.trim(),productQuantity.text.trim(),
-                productPrice.text)
-            navController.navigate(ROUTE_ADD_TO_CART)
-
-
-        }) {
-            Text(text = "ADD TO CART")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-
-        //---------------------IMAGE PICKER START-----------------------------------//
-
-//        ImagePicker(Modifier,context, navController, productName.text.trim(), productQuantity.text.trim(), productPrice.text.trim())
-
-
-    }
 }
 
 @Preview

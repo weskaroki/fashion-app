@@ -28,11 +28,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.wes.sleekfashion.R
+import com.wes.sleekfashion.navigation.ROUTE_ADD_TO_CART
+import com.wes.sleekfashion.navigation.ROUTE_MAIN_PRODUCTS_SCREEN
+import com.wes.sleekfashion.ui.theme.Products.AddProductsScreen
 
 @Composable
-fun SuitsScreen(navController: NavController){
+fun SuitsScreen(navController: NavHostController){
     Column (
 
         modifier = Modifier
@@ -43,7 +47,7 @@ fun SuitsScreen(navController: NavController){
 
 
     ){
-        Navbar16()
+        Navbar16(navController)
         Spacer(modifier = Modifier.height(10.dp))
         Box (
             modifier = Modifier
@@ -59,7 +63,7 @@ fun SuitsScreen(navController: NavController){
             )
         }
         Spacer(modifier = Modifier.height(30.dp))
-        AddProductsScreen(rememberNavController())
+        AddProductsScreen(navController)
 
 
     }
@@ -68,12 +72,12 @@ fun SuitsScreen(navController: NavController){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Navbar16(){
+fun Navbar16(navController: NavController){
     val context = LocalContext.current.applicationContext
     TopAppBar(
         title = { Text(text = "Discover", color = Color.DarkGray) },
         navigationIcon = {
-            IconButton(onClick = { Toast.makeText(context,"You have a clicked a home icon", Toast.LENGTH_SHORT).show() }) {
+            IconButton(onClick = {navController.navigate(ROUTE_MAIN_PRODUCTS_SCREEN) }) {
                 Icon(imageVector = Icons.Filled.Home, contentDescription = "HOME", tint = Color.DarkGray)
             }
         },
@@ -83,7 +87,7 @@ fun Navbar16(){
             navigationIconContentColor = Color.White
         ),
         actions = {
-            IconButton(onClick = { Toast.makeText(context,"shopping cart", Toast.LENGTH_SHORT).show()}) {
+            IconButton(onClick = { navController.navigate(ROUTE_ADD_TO_CART)}) {
                 Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = "shop", tint = Color.DarkGray )
             }
 

@@ -32,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import com.wes.sleekfashion.data.AuthViewModel
 import com.wes.sleekfashion.navigation.ROUTE_HOME
 import com.wes.sleekfashion.navigation.ROUTE_LOGIN
+import com.wes.sleekfashion.navigation.ROUTE_MAIN_PRODUCTS_SCREEN
 
 //import com.wes.myapp.data.AuthViewModel
 //import com.wes.myapp.navigation.ROUTE_HOME
@@ -90,7 +91,7 @@ fun RegisterScreen(navController: NavController){
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = {
+        Button(onClick = { navController.navigate(ROUTE_MAIN_PRODUCTS_SCREEN)
             val myregister= AuthViewModel(navController,context)
             myregister.signup(email.text.trim(),pass.text.trim(),confirmpass.text.trim())
 

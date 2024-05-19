@@ -53,6 +53,8 @@ import androidx.navigation.compose.rememberNavController
 import com.wes.sleekfashion.Item
 import com.wes.sleekfashion.MainActivity
 import com.wes.sleekfashion.R
+import com.wes.sleekfashion.navigation.ROUTE_ADD_TO_CART
+import com.wes.sleekfashion.navigation.ROUTE_MAIN_PRODUCTS_SCREEN
 
 
 @Composable
@@ -68,7 +70,7 @@ fun MensScreen(navController: NavController){
 
 
     ){
-        Navbar()
+        Navbar(navController)
         Spacer(modifier = Modifier.height(20.dp))
         ImageCard(
             painter = painterResource(id = R.drawable.offersmen
@@ -93,12 +95,12 @@ fun MensScreen(navController: NavController){
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Navbar(){
+fun Navbar(navController: NavController){
     val context = LocalContext.current.applicationContext
     TopAppBar(
         title = { Text(text = "Discover", color = Color.DarkGray) },
         navigationIcon = {
-            IconButton(onClick = { Toast.makeText(context,"You have a clicked a home icon",Toast.LENGTH_SHORT).show() }) {
+            IconButton(onClick = { navController.navigate(ROUTE_MAIN_PRODUCTS_SCREEN) }) {
                 Icon(imageVector = Icons.Filled.Home, contentDescription = "HOME", tint = Color.DarkGray)
             }
         },
@@ -108,7 +110,7 @@ fun Navbar(){
             navigationIconContentColor = Color.White
         ),
         actions = {
-            IconButton(onClick = { Toast.makeText(context,"shopping cart",Toast.LENGTH_SHORT).show()}) {
+            IconButton(onClick = { navController.navigate(ROUTE_ADD_TO_CART)}) {
                 Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = "shop", tint = Color.DarkGray )
             }
 

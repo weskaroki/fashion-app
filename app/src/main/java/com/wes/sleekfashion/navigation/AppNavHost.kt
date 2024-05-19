@@ -30,15 +30,17 @@ import com.wes.sleekfashion.ui.theme.Men.ShirtsScreen
 import com.wes.sleekfashion.ui.theme.Men.ShoeScreen
 import com.wes.sleekfashion.ui.theme.Men.SuitsScreen
 import com.wes.sleekfashion.ui.theme.Men.TracksScreen
+import com.wes.sleekfashion.ui.theme.Products.AddProductsScreen
 import com.wes.sleekfashion.ui.theme.Products.AddToCartScreen
 import com.wes.sleekfashion.ui.theme.Products.MAINProductScreen
+import com.wes.sleekfashion.ui.theme.Products.UpdateProductsScreen
 import com.wes.sleekfashion.ui.theme.Register.RegisterScreen
 
 
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier,
                navController: NavHostController= rememberNavController()
-               , startDestination:String = ROUTE_HOODIE) {
+               , startDestination:String = ROUTE_HOME) {
 
     NavHost(navController = navController ,
         modifier = Modifier,
@@ -67,6 +69,10 @@ fun AppNavHost(modifier: Modifier = Modifier,
         composable(ROUTE_PAJAMAS){ PajamasScreen(navController = navController) }
         composable(ROUTE_SWEATERS){ SweatersScreen(navController = navController) }
         composable(ROUTE_ADD_TO_CART){ AddToCartScreen(navController = navController)}
+        composable(ROUTE_ADD){ AddProductsScreen(navController)}
+        composable(ROUTE_UPDATE_PRODUCT + "/{id}"){ passedData -> UpdateProductsScreen(
+            navController, passedData.arguments?.getString("id") !!
+        )}
 
     }
 }

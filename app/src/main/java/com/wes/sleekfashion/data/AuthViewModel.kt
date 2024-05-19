@@ -60,7 +60,7 @@ class AuthViewModel(var navController: NavController, var context: Context) {
 
                         if (it.isSuccessful){
                             Toast.makeText(context,"Registered Successfully",Toast.LENGTH_LONG).show()
-                            navController.navigate(ROUTE_LOGIN)
+                            navController.navigate(ROUTE_MAIN_PRODUCTS_SCREEN)
 
                         }else{
                             Toast.makeText(context,"${it.exception!!.message}",Toast.LENGTH_LONG).show()
@@ -68,7 +68,7 @@ class AuthViewModel(var navController: NavController, var context: Context) {
                         }
                     }
                 }else{
-                    navController.navigate(ROUTE_REGISTER)
+                    navController.navigate(ROUTE_MAIN_PRODUCTS_SCREEN)
                 }
 
             } }
